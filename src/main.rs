@@ -35,5 +35,17 @@ fn main() -> Result<()> {
         }
     }
 
+    let mut longest_type = 10;
+    for (typ, _) in &result_table {
+        if typ.len() > longest_type {
+            longest_type = typ.len();
+        }
+    }
+
+    println!("| {:width$} | {:<10} | {:<10} |", "type name", "count", "size", width = longest_type);
+    for (typ, (count, size)) in &result_table {
+        println!("| {:width$} | {:<10} | {:<10} |", typ, count, size, width = longest_type);
+    }
+
     Ok(())
 }
