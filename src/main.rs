@@ -42,10 +42,14 @@ fn main() -> Result<()> {
         }
     }
 
-    println!("| {:width$} | {:<10} | {:<10} |", "type name", "count", "size", width = longest_type);
+    print_table_row(longest_type, &"type name".to_string(), &"count".to_string(), &"size".to_string());
     for (typ, (count, size)) in &result_table {
-        println!("| {:width$} | {:<10} | {:<10} |", typ, count, size, width = longest_type);
+        print_table_row(longest_type, typ, &count.to_string(), &size.to_string());
     }
 
     Ok(())
+}
+
+fn print_table_row(longest_type: usize, typ: &String, count: &String, size: &String) {
+    println!("| {:width$} | {:<10} | {:<10} |", typ, count, size, width = longest_type);
 }
