@@ -48,8 +48,9 @@ fn main() -> Result<()> {
 
     let mut longest_type = 10;
     for (typ, _) in &result_table {
-        if typ.len() > longest_type {
-            longest_type = typ.len();
+        let char_length = typ.chars().count();
+        if char_length > longest_type {
+            longest_type = char_length;
         }
     }
 
