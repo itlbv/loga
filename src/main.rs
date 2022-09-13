@@ -34,13 +34,12 @@ fn main() -> Result<()> {
         match parsed["type"].as_str() {
             None => failed_lines.push(String::from(line_str)),
             Some(typ) => {
-                let size = line_str.capacity(); // TODO wrong size here
-
+                let byte_size = line_str.len();
                 if result_table.contains_key(&typ.to_string()) {
                     let (count, curr_size) = result_table[&typ.to_string()];
-                    result_table.insert(typ.to_string(), (count + 1, curr_size + size));
+                    result_table.insert(typ.to_string(), (count + 1, curr_size + byte_size));
                 } else {
-                    result_table.insert(typ.to_string(), (1, size));
+                    result_table.insert(typ.to_string(), (1, byte_size));
                 }
             }
         }
@@ -54,7 +53,7 @@ fn main() -> Result<()> {
         }
     }
 
-    print_table_row(longest_type, &"type name".to_string(), &"count".to_string(), &"size".to_string());
+    print_table_row(longest_type, &"type".to_string(), &"count".to_string(), &"byte size".to_string());
     for (typ, (count, size)) in &result_table {
         print_table_row(longest_type, typ, &count.to_string(), &size.to_string());
     }
